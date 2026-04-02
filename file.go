@@ -6,7 +6,7 @@ import (
 	"path"
 
 	"cloud.google.com/go/storage"
-	"github.com/jarxorg/wfs"
+	"github.com/mojatter/wfs"
 )
 
 type gcsFile struct {

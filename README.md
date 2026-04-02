@@ -1,9 +1,9 @@
-# github.com/jarxorg/gcsfs
+# github.com/mojatter/gcsfs
 
-[![PkgGoDev](https://pkg.go.dev/badge/github.com/jarxorg/gcsfs)](https://pkg.go.dev/github.com/jarxorg/gcsfs)
-[![Report Card](https://goreportcard.com/badge/github.com/jarxorg/gcsfs)](https://goreportcard.com/report/github.com/jarxorg/gcsfs)
+[![PkgGoDev](https://pkg.go.dev/badge/github.com/mojatter/gcsfs)](https://pkg.go.dev/github.com/mojatter/gcsfs)
+[![Report Card](https://goreportcard.com/badge/github.com/mojatter/gcsfs)](https://goreportcard.com/report/github.com/mojatter/gcsfs)
 
-Package gcsfs provides an implementation of [wfs](https://github.com/jarxorg/wfs) for GCS (Google Cloud Storage).
+Package gcsfs provides an implementation of [wfs](https://github.com/mojatter/wfs) for GCS (Google Cloud Storage).
 
 ## Examples
 
@@ -17,7 +17,7 @@ import (
   "io/fs"
   "log"
 
-  "github.com/jarxorg/gcsfs"
+  "github.com/mojatter/gcsfs"
 )
 
 func main() {
@@ -41,8 +41,8 @@ import (
   "io/fs"
   "log"
 
-  "github.com/jarxorg/wfs"
-  "github.com/jarxorg/gcsfs"
+  "github.com/mojatter/wfs"
+  "github.com/mojatter/gcsfs"
 )
 
 func main() {
@@ -62,7 +62,7 @@ GCSFS can pass TestFS in "testing/fstest".
 import (
   "testing/fstest"
 
-  "github.com/jarxorg/gcsfs"
+  "github.com/mojatter/gcsfs"
 )
 
 // ...

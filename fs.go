@@ -10,7 +10,7 @@ import (
 	"syscall"
 
 	"cloud.google.com/go/storage"
-	"github.com/jarxorg/wfs"
+	"github.com/mojatter/wfs"
 	"google.golang.org/api/iterator"
 )
 

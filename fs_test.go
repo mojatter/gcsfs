@@ -14,11 +14,11 @@ import (
 	"testing/fstest"
 
 	"cloud.google.com/go/storage"
-	"github.com/jarxorg/io2"
-	"github.com/jarxorg/wfs"
-	"github.com/jarxorg/wfs/memfs"
-	"github.com/jarxorg/wfs/osfs"
-	"github.com/jarxorg/wfs/wfstest"
+	"github.com/mojatter/io2"
+	"github.com/mojatter/wfs"
+	"github.com/mojatter/wfs/memfs"
+	"github.com/mojatter/wfs/osfs"
+	"github.com/mojatter/wfs/wfstest"
 	"google.golang.org/api/iterator"
 )
 
