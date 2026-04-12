@@ -75,6 +75,15 @@ if err := fstest.TestFS(fsys, "<your-expected>"); err != nil {
 
 ## Integration tests
 
+Integration tests run against a real GCS bucket and require
+[Application Default Credentials](https://cloud.google.com/docs/authentication/application-default-credentials):
+
+```sh
+gcloud auth application-default login
+```
+
+Then run:
+
 ```sh
 FSTEST_BUCKET="<your-bucket>" \
 FSTEST_EXPECTED="<your-expected>" \

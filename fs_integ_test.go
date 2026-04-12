@@ -12,7 +12,6 @@ import (
 	"testing/fstest"
 
 	"cloud.google.com/go/storage"
-	"google.golang.org/api/option"
 )
 
 func TestFSIntegration(t *testing.T) {
@@ -23,7 +22,7 @@ func TestFSIntegration(t *testing.T) {
 	}
 
 	ctx := context.Background()
-	client, err := storage.NewClient(ctx, option.WithoutAuthentication())
+	client, err := storage.NewClient(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
