@@ -166,7 +166,8 @@ func (fsys *GCSFS) ReadFile(name string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer f.Close()
+
+	defer func() { _ = f.Close() }()
 
 	return io.ReadAll(f)
 }
@@ -315,7 +316,8 @@ func (fsys *GCSFS) WriteFile(name string, p []byte, mode fs.FileMode) (int, erro
 	if err != nil {
 		return 0, err
 	}
-	defer f.Close()
+
+	defer func() { _ = f.Close() }()
 
 	n, err := f.Write(p)
 	if err != nil {

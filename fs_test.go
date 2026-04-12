@@ -14,13 +14,21 @@ import (
 	"testing/fstest"
 
 	"cloud.google.com/go/storage"
-	"github.com/mojatter/io2"
 	"github.com/mojatter/wfs"
 	"github.com/mojatter/wfs/memfs"
 	"github.com/mojatter/wfs/osfs"
 	"github.com/mojatter/wfs/wfstest"
 	"google.golang.org/api/iterator"
 )
+
+// lazyWriteCloser is a simple io.WriteCloser backed by function delegates.
+type lazyWriteCloser struct {
+	writeFunc func(p []byte) (int, error)
+	closeFunc func() error
+}
+
+func (wc *lazyWriteCloser) Write(p []byte) (int, error) { return wc.writeFunc(p) }
+func (wc *lazyWriteCloser) Close() error                { return wc.closeFunc() }
 
 type fsClient struct {
 	fsys fs.FS
@@ -66,14 +74,14 @@ func (o *fsObject) newReader(ctx context.Context) (io.ReadCloser, error) {
 func (o *fsObject) newWriter(ctx context.Context) io.WriteCloser {
 	f, createErr := wfs.CreateFile(o.fsys, path.Join(o.dir, o.name), fs.ModePerm)
 
-	return &io2.Delegator{
-		WriteFunc: func(p []byte) (int, error) {
+	return &lazyWriteCloser{
+		writeFunc: func(p []byte) (int, error) {
 			if createErr != nil {
 				return 0, createErr
 			}
 			return f.Write(p)
 		},
-		CloseFunc: func() error {
+		closeFunc: func() error {
 			if f == nil {
 				return nil
 			}

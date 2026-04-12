@@ -52,10 +52,6 @@ func mockClient(t *testing.T, m *mockTransport) *storage.Client {
 	return cl
 }
 
-func bodyReader(s string) io.ReadCloser {
-	return io.NopCloser(strings.NewReader(s))
-}
-
 func TestGCSRead(t *testing.T) {
 	want := []byte(`test`)
 
