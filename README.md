@@ -1,9 +1,12 @@
-# github.com/mojatter/gcsfs
+# gcsfs
 
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/mojatter/gcsfs)](https://pkg.go.dev/github.com/mojatter/gcsfs)
 [![Report Card](https://goreportcard.com/badge/github.com/mojatter/gcsfs)](https://goreportcard.com/report/github.com/mojatter/gcsfs)
+[![Tests](https://github.com/mojatter/gcsfs/actions/workflows/tests.yaml/badge.svg)](https://github.com/mojatter/gcsfs/actions/workflows/tests.yaml)
 
 Package gcsfs provides an implementation of [wfs](https://github.com/mojatter/wfs) for GCS (Google Cloud Storage).
+
+Requires Go 1.24 or later.
 
 ## Examples
 
@@ -54,14 +57,56 @@ func main() {
 }
 ```
 
+### Explicit client
+
+When you need to control the GCS configuration (credentials, custom
+endpoint, etc.), construct the storage client yourself and pass it in:
+
+```go
+package main
+
+import (
+  "context"
+  "log"
+
+  "cloud.google.com/go/storage"
+  "github.com/mojatter/gcsfs"
+)
+
+func main() {
+  ctx := context.Background()
+  client, err := storage.NewClient(ctx)
+  if err != nil {
+    log.Fatal(err)
+  }
+  fsys := gcsfs.NewWithClient("<your-bucket>", client).
+    WithContext(ctx)
+  defer fsys.Close()
+  // use fsys ...
+  _ = fsys
+}
+```
+
+## Capability layers
+
+gcsfs implements the following [wfs](https://github.com/mojatter/wfs)
+capability interfaces:
+
+| Capability | Interface | Notes |
+| --- | --- | --- |
+| Read | `fs.FS`, `fs.GlobFS`, `fs.ReadDirFS`, `fs.ReadFileFS`, `fs.StatFS`, `fs.SubFS` | |
+| Write | `wfs.WriteFileFS` | `MkdirAll` is a no-op (GCS has no directories) |
+| Remove | `wfs.RemoveFileFS` | |
+| Rename | `wfs.RenameFS` | Implemented via CopierFrom + Delete |
+| Sync | `wfs.SyncWriterFile` | No-op (GCS writes atomically on Close) |
+
 ## Tests
 
-GCSFS can pass TestFS in "testing/fstest".
+gcsfs can pass TestFS in `testing/fstest`.
 
 ```go
 import (
   "testing/fstest"
-
   "github.com/mojatter/gcsfs"
 )
 
