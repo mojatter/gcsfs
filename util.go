@@ -76,7 +76,7 @@ func newQuery(delim, prefix, offset string) *storage.Query {
 		StartOffset:              offset,
 		IncludeTrailingDelimiter: delim == "/",
 	}
-	query.SetAttrSelection([]string{"Prefix", "Name", "Size", "Updated"})
+	_ = query.SetAttrSelection([]string{"Prefix", "Name", "Size", "Updated"})
 	return query
 }
 

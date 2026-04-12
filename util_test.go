@@ -201,7 +201,7 @@ func TestNewQuery(t *testing.T) {
 		StartOffset:              "offset",
 		IncludeTrailingDelimiter: true,
 	}
-	want.SetAttrSelection([]string{"Prefix", "Name", "Size", "Updated"})
+	_ = want.SetAttrSelection([]string{"Prefix", "Name", "Size", "Updated"})
 
 	got := newQuery(want.Delimiter, want.Prefix, want.StartOffset)
 	if !reflect.DeepEqual(got, want) {
