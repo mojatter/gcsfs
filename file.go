@@ -67,8 +67,8 @@ type gcsWriterFile struct {
 }
 
 var (
-	_ wfs.WriterFile = (*gcsWriterFile)(nil)
-	_ fs.FileInfo    = (*gcsWriterFile)(nil)
+	_ wfs.SyncWriterFile = (*gcsWriterFile)(nil)
+	_ fs.FileInfo        = (*gcsWriterFile)(nil)
 )
 
 func newGcsWriterFile(fsys *GCSFS, obj gcsObject, name string) *gcsWriterFile {
@@ -97,6 +97,12 @@ func (f *gcsWriterFile) Close() error {
 		f.out = nil
 		return err
 	}
+	return nil
+}
+
+// Sync is a no-op. GCS does not support partial flushes; the entire object
+// is written atomically on Close.
+func (f *gcsWriterFile) Sync() error {
 	return nil
 }
 
