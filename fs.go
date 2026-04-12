@@ -135,6 +135,10 @@ func (fsys *GCSFS) openFile(name string) (*gcsFile, error) {
 
 // Open opens the named file or directory.
 func (fsys *GCSFS) Open(name string) (fs.File, error) {
+	if name == "." {
+		return newGcsDir(fsys, ".").open(fsys.DirOpenBufferSize)
+	}
+
 	f, err := fsys.openFile(name)
 	if err != nil && isNotExist(err) {
 		return newGcsDir(fsys, name).open(fsys.DirOpenBufferSize)
@@ -145,6 +149,10 @@ func (fsys *GCSFS) Open(name string) (fs.File, error) {
 // Stat returns a FileInfo describing the file. If there is an error, it should be
 // of type *PathError.
 func (fsys *GCSFS) Stat(name string) (fs.FileInfo, error) {
+	if name == "." {
+		return newGcsDir(fsys, ".").open(1)
+	}
+
 	f, err := fsys.openFile(name)
 	if err != nil && isNotExist(err) {
 		return newGcsDir(fsys, name).open(1)
