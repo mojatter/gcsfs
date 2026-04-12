@@ -63,6 +63,20 @@ type fsObject struct {
 	name string
 }
 
+func (o *fsObject) copyTo(ctx context.Context, dst gcsObject) error {
+	dstObj, ok := dst.(*fsObject)
+	if !ok {
+		return errors.New("gcsfs: destination is not a fsObject")
+	}
+
+	data, err := fs.ReadFile(o.fsys, path.Join(o.dir, o.name))
+	if err != nil {
+		return err
+	}
+	_, err = wfs.WriteFile(dstObj.fsys, path.Join(dstObj.dir, dstObj.name), data, fs.ModePerm)
+	return err
+}
+
 func (o *fsObject) newReader(ctx context.Context) (io.ReadCloser, error) {
 	in, err := o.fsys.Open(path.Join(o.dir, o.name))
 	if err != nil {
@@ -279,6 +293,20 @@ func TestWriteFileFS(t *testing.T) {
 		t.Fatal(err)
 	}
 	if err := wfstest.TestWriteFileFS(fsys, tmpDir); err != nil {
+		t.Errorf("Error wfstest: %+v", err)
+	}
+}
+
+func TestRenameFS(t *testing.T) {
+	fsys := &GCSFS{
+		bucket: "testdata",
+		c:      &fsClient{fsys: memfs.New()},
+	}
+	tmpDir := "test_rename"
+	if err := wfs.MkdirAll(fsys, tmpDir, fs.ModePerm); err != nil {
+		t.Fatal(err)
+	}
+	if err := wfstest.TestRenameFS(fsys, tmpDir); err != nil {
 		t.Errorf("Error wfstest: %+v", err)
 	}
 }

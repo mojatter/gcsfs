@@ -37,6 +37,7 @@ var (
 	_ fs.GlobFS        = (*GCSFS)(nil)
 	_ wfs.WriteFileFS  = (*GCSFS)(nil)
 	_ wfs.RemoveFileFS = (*GCSFS)(nil)
+	_ wfs.RenameFS     = (*GCSFS)(nil)
 )
 
 // New returns a filesystem for the tree of objects rooted at the specified bucket.
@@ -324,6 +325,30 @@ func (fsys *GCSFS) WriteFile(name string, p []byte, mode fs.FileMode) (int, erro
 		return 0, toPathError(err, "WriteFile", name)
 	}
 	return n, nil
+}
+
+// Rename renames oldpath to newpath using GCS server-side copy followed by delete.
+func (fsys *GCSFS) Rename(oldpath, newpath string) error {
+	if !fs.ValidPath(oldpath) {
+		return toPathError(fs.ErrInvalid, "Rename", oldpath)
+	}
+	if !fs.ValidPath(newpath) {
+		return toPathError(fs.ErrInvalid, "Rename", newpath)
+	}
+	c, err := fsys.client()
+	if err != nil {
+		return toPathError(err, "Rename", oldpath)
+	}
+
+	b := c.bucket(fsys.bucket)
+	src := b.object(fsys.key(oldpath))
+	dst := b.object(fsys.key(newpath))
+
+	if err := src.copyTo(fsys.Context(), dst); err != nil {
+		return toPathError(err, "Rename", oldpath)
+	}
+
+	return toPathError(src.delete(fsys.Context()), "Rename", oldpath)
 }
 
 // RemoveFile removes the specified named file.

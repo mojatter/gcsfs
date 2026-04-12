@@ -2,6 +2,7 @@ package gcsfs
 
 import (
 	"context"
+	"errors"
 	"io"
 
 	"cloud.google.com/go/storage"
@@ -21,6 +22,7 @@ type gcsObject interface {
 	attrs(ctx context.Context) (*storage.ObjectAttrs, error)
 	newReader(ctx context.Context) (io.ReadCloser, error)
 	newWriter(ctx context.Context) io.WriteCloser
+	copyTo(ctx context.Context, dst gcsObject) error
 	delete(ctx context.Context) error
 }
 
@@ -64,6 +66,15 @@ func (o *storageObject) newReader(ctx context.Context) (io.ReadCloser, error) {
 
 func (o *storageObject) newWriter(ctx context.Context) io.WriteCloser {
 	return o.obj.NewWriter(ctx)
+}
+
+func (o *storageObject) copyTo(ctx context.Context, dst gcsObject) error {
+	dstObj, ok := dst.(*storageObject)
+	if !ok {
+		return errors.New("gcsfs: destination is not a storageObject")
+	}
+	_, err := dstObj.obj.CopierFrom(o.obj).Run(ctx)
+	return err
 }
 
 func (o *storageObject) attrs(ctx context.Context) (*storage.ObjectAttrs, error) {
