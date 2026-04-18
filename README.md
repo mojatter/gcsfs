@@ -6,7 +6,7 @@
 
 Package gcsfs provides an implementation of [wfs](https://github.com/mojatter/wfs) for GCS (Google Cloud Storage).
 
-Requires Go 1.24 or later.
+Requires Go 1.25 or later.
 
 ## Examples
 
