@@ -3,9 +3,9 @@ module github.com/mojatter/gcsfs
 go 1.25.8
 
 require (
-	cloud.google.com/go/storage v1.63.1
+	cloud.google.com/go/storage v1.64.0
 	github.com/mojatter/wfs v0.5.1
-	google.golang.org/api v0.289.0
+	google.golang.org/api v0.290.0
 )
 
 require (
