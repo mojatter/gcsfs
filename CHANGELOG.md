@@ -7,6 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.1]
+
+### Fixed
+
+- Upgraded `google.golang.org/grpc` to v1.82.1, fixing
+  [GO-2026-6061](https://pkg.go.dev/vuln/GO-2026-6061) (xDS RBAC
+  authorization engine and HTTP/2 transport server vulnerabilities).
+
+### Changed
+
+- Minimum Go version bumped to 1.25 (required by
+  `cloud.google.com/go/storage` v1.62.x).
+- Routine dependency updates via Dependabot.
+
 ## [0.3.0]
 
 ### Added
@@ -34,5 +48,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 See the git log.
 
-[Unreleased]: https://github.com/mojatter/gcsfs/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/mojatter/gcsfs/compare/v0.3.1...HEAD
+[0.3.1]: https://github.com/mojatter/gcsfs/compare/v0.3.0...v0.3.1
 [0.3.0]: https://github.com/mojatter/gcsfs/compare/v0.2.0...v0.3.0
