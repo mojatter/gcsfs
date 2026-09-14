@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Minimum Go version bumped to 1.26 (required by
+  `google.golang.org/api` v0.297.0).
+- Upgraded `cloud.google.com/go/storage` to v1.67.0 and
+  `google.golang.org/api` to v0.297.0.
+
 ## [0.3.1]
 
 ### Fixed
