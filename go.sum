@@ -16,8 +16,8 @@ cloud.google.com/go/longrunning v1.2.0 h1:WjYH3YHBGCxGJP9M4dWGHBfXr/cFIjMkNgWcJj
 cloud.google.com/go/longrunning v1.2.0/go.mod h1:5KMQALFGOCtFoi2xSOA1u3H7WKlhmckgiyFw7+LGQp0=
 cloud.google.com/go/monitoring v1.30.0 h1:r/d+JUbyKmJ8b07iznuKfzVzrIXTWxHQ3lBRm3x2LlY=
 cloud.google.com/go/monitoring v1.30.0/go.mod h1:htlUR0QWVMrjFzZmN4LGnMAve9xB/eduwjmINxVZ8RM=
-cloud.google.com/go/storage v1.67.0 h1:8xD3NvKuHE4c+b/kmSIVBdTc0BiOjplx+KecKGR9fr8=
-cloud.google.com/go/storage v1.67.0/go.mod h1:UsS9OgFg/XHOSYakQ8ZtLWWeyGkk1WnmD/GsGfN0BHM=
+cloud.google.com/go/storage v1.67.1 h1:cDeyjY1ik/2IBs4/nLytL6Orrtbi5M0G6beyGRl/9EQ=
+cloud.google.com/go/storage v1.67.1/go.mod h1:UsS9OgFg/XHOSYakQ8ZtLWWeyGkk1WnmD/GsGfN0BHM=
 cloud.google.com/go/trace v1.16.0 h1:GmQovzFc5F0CNfl0VLgL64aoTtu7xsM0YajW2GlG9+E=
 cloud.google.com/go/trace v1.16.0/go.mod h1:r+bdAn16dKLSV1G2D5v3e58IlQlizfxWrUfjx7kM7X0=
 github.com/GoogleCloudPlatform/opentelemetry-operations-go/detectors/gcp v1.33.0 h1:l7+6kwRMJNwdCvYdDl7Eax+wzEYHSnNY7zrrfbhDdTA=
@@ -65,8 +65,8 @@ github.com/googleapis/enterprise-certificate-proxy v0.3.20 h1:t/xL64VUoN69MuMRQu
 github.com/googleapis/enterprise-certificate-proxy v0.3.20/go.mod h1:L3D/IQExI6LqEjBdXcZQ1WluSgigQmSwBboFstVPM4w=
 github.com/googleapis/gax-go/v2 v2.24.0 h1:myMaPYyF9MecEmvQqMqomIwn9t/4KCZN9qnwsS76wlg=
 github.com/googleapis/gax-go/v2 v2.24.0/go.mod h1:IaTHBDd7NHxSCiu0vEs8pQZu4dGZrWwuSoxCnk16OFM=
-github.com/mojatter/wfs v0.5.1 h1:fwIpS83MjndH/VoF4vgBvpTeyKMoNnyWdKXy5aFymwQ=
-github.com/mojatter/wfs v0.5.1/go.mod h1:PlxShpeTA90XFUWkWWi9DmXG7tgFd4v64hPDqrf1n7c=
+github.com/mojatter/wfs v0.6.0 h1:ep3lVfp3TuZtp9ROKY8a87/S6OOgVQsz1rVPodjbSQc=
+github.com/mojatter/wfs v0.6.0/go.mod h1:PlxShpeTA90XFUWkWWi9DmXG7tgFd4v64hPDqrf1n7c=
 github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10 h1:GFCKgmp0tecUJ0sJuv4pzYCqS9+RGSn52M3FUwPs+uo=
 github.com/planetscale/vtprotobuf v0.6.1-0.20240319094008-0393e58bdf10/go.mod h1:t/avpk3KcrXxUnYOhZhMXJlSEyie6gQbtLq5NM3loB8=
 github.com/pmezard/go-difflib v1.0.1-0.20181226105442-5d4384ee4fb2 h1:Jamvg5psRIccs7FGNTlIRMkT8wgtp5eCXdBlqhYGL6U=
