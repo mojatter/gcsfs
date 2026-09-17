@@ -4,8 +4,8 @@ go 1.26.0
 
 require (
 	cloud.google.com/go/storage v1.67.1
-	github.com/mojatter/wfs v0.6.0
-	google.golang.org/api v0.297.0
+	github.com/mojatter/wfs v0.7.1
+	google.golang.org/api v0.298.0
 )
 
 require (
